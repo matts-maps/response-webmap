@@ -130,7 +130,17 @@
               'paint': {
                 'circle-radius': 5,
                 'circle-color': "blue"
-              }
+              },
+// color circles by ethnicity, using a match expression
+// https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
+'circle-color': [
+'match',
+['get', 'e.features[0].properties.eventtype'],
+'Ebola',
+'#fbb03b',
+'Fire',
+/* other */ '#ccc'
+]
             });
 
 
