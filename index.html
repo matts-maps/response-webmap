@@ -18,88 +18,17 @@
 var map = new mapboxgl.Map({
 container: 'map',
 style: 'mapbox://styles/mapbox/light-v10',
-center: [0.5, 0.5],
-zoom: 2
+center: [0, 0.5],
+zoom: 1
 });
-
-map.addControl(new mapboxgl.NavigationControl());
  
-// filters for classifying earthquakes into five categories based on magnitude
-var eventtype1 = ['=', ['get', 'eventtype'], Flood];
-var eventtype2 = ['=', ['get', 'eventtype'], Earthquake];
-var eventtype3 = ['=', ['get', 'eventtype'], Covid-19];
-var eventtype4 = ['=', ['get', 'eventtype'], Cyclone];
-var eventtype5 = ['=', ['get', 'eventtype'], Munitions Explosion];
- 
-// colors to use for the categories
-var colors = ['#fed976', '#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c'];
-
 map.on('load', function () {
-// add a clustered GeoJSON source for a sample set of earthquakes
-map.addSource('earthquakes', {
-'type': 'geojson',
-'data':
-'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson',
-'cluster': true,
-'clusterRadius': 80,
-'clusterProperties': {
-// keep separate counts for each eventtype category in a cluster
-'eventtype1': ['+', ['case', eventtype1, 1, 0]],
-'eventtype2': ['+', ['case', eventtype2, 1, 0]],
-'eventtype3': ['+', ['case', eventtype, 1, 0]],
-'eventtype4': ['+', ['case', eventtype4, 1, 0]],
-'eventtype5': ['+', ['case', eventtype5, 1, 0]]
-}
-});
-
- 
-// circle and symbol layers for rendering individual earthquakes (unclustered points)
-map.addLayer({
-'id': 'earthquake_circle',
-'type': 'circle',
-'source': 'earthquakes',
-'filter': ['!=', 'cluster', true],
-'paint': {
-'circle-color': [
-'case',
-eventtype1,
-colors[0],
-eventtype2,
-colors[1],
-eventtype3,
-colors[2],
-eventtype4,
-colors[3],
-colors[4]
-],
-'circle-opacity': 0.6,
-'circle-radius': 12
-}
-});
-
-map.addLayer({
-'id': 'earthquake_label',
-'type': 'symbol',
-'source': 'earthquakes',
-'filter': ['!=', 'eventtype', true],
-'layout': {
-'text-field': [
-'number-format',
-['get', 'eventtype'],
-{ 'min-fraction-digits': 1, 'max-fraction-digits': 1 }
-],
-'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
-'text-size': 10
-},
-'paint': {
-'text-color': [
-'case',
-['<', ['get', 'eventtype'], 3],
-'black',
-'white'
-]
-}
-});
+// Add an image to use as a custom marker
+map.loadImage(
+'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
+function (error, image) {
+if (error) throw error;
+map.addImage('custom-marker', image);
 // Add a GeoJSON source with 2 points
 map.addSource('points', {
 'type': 'geojson',
@@ -4266,7 +4195,7 @@ map.addLayer({
 'layout': {
 'icon-image': 'custom-marker',
 // get the title name from the source's "title" property
-'text-field': ['get', 'Title'],
+'text-field': ['get', 'title'],
 'text-font': [
 'Open Sans Semibold',
 'Arial Unicode MS Bold'
