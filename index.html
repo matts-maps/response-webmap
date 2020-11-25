@@ -145,7 +145,7 @@ map.addControl(new mapboxgl.NavigationControl());
               //set popup text 
               //You can adjust the values of the popup to match the headers of your CSV. 
               // For example: e.features[0].properties.Name is retrieving information from the field Name in the original CSV. 
-              var description = `<h3>` + e.features[0].properties.Title + `</h3>` + `<h4>` + `<b>` + `Date: ` + `</b>` + e.features[0].properties.daterange + `</h4>` + `<h4>` + `<b>` + `Location: ` + `</b>` + e.features[0].properties.city + `, ` + e.features[0].properties.country +`</h4>`+ `<h4>` + `<b>` + `Event: ` + `</b>` + e.features[0].properties.eventtype + `</h4>`+ `<h4>` + `<b>` + `Partner: ` + `</b>` + e.features[0].properties.partner + `</h4>`+ `<h4>` + `<b>` + `Maps: ` + `</b>` + `<a href="` + e.features[0].properties.mdrurl + `">Maps and Data Repository</a>` + `</h4>`;
+              var description = `<h3>` + e.features[0].properties.Title + `</h3>` +  `<b>` + `Date: ` + `</b>` + e.features[0].properties.daterange  + `<b>` + `Location: ` + `</b>` + e.features[0].properties.city + `, ` + e.features[0].properties.country  + `<b>` + `Event: ` + `</b>` + e.features[0].properties.eventtype + `<b>` + `Partner: ` + `</b>` + e.features[0].properties.partner  + `<b>` + `Maps: ` + `</b>` + `<a href="` + e.features[0].properties.mdrurl + `">Maps and Data Repository</a>`;
 
               // Ensure that if the map is zoomed out such that multiple
               // copies of the feature are visible, the popup appears
