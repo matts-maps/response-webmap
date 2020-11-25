@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Draw GeoJSON points</title>
+<title>MapAction responses</title>
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
 <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
@@ -18,9 +18,21 @@
 var map = new mapboxgl.Map({
 container: 'map',
 style: 'mapbox://styles/mapbox/light-v10',
-center: [-96, 37.8],
+center: [0.5, 0.5],
 zoom: 3
 });
+
+map.addControl(new mapboxgl.NavigationControl());
+ 
+// filters for classifying earthquakes into five categories based on magnitude
+var eventtype1 = ['=', ['get', 'evenytype'], Flood];
+var eventtype2 = ['=', ['get', 'evenytype'], Cyclone];
+var eventtype3 = ['=', ['get', 'evenytype'], Earthquake];
+var eventtype4 = ['=', ['get', 'evenytype'], Covid-19];
+var eventtype5 = ['=', ['get', 'evenytype'], Munitions Explosion];
+ 
+// colors to use for the categories
+var colors = ['#fed976', '#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c'];
  
 map.on('load', function () {
 // Add an image to use as a custom marker
@@ -30,7 +42,7 @@ function (error, image) {
 if (error) throw error;
 map.addImage('custom-marker', image);
 // Add a GeoJSON source with 2 points
-map.addSource('points', {
+map.addSource('responses', {
 'type': 'geojson',
 'data': {
    "type": "FeatureCollection",
@@ -4189,19 +4201,24 @@ map.addSource('points', {
  
 // Add a symbol layer
 map.addLayer({
-'id': 'points',
-'type': 'symbol',
-'source': 'points',
-'layout': {
-'icon-image': 'custom-marker',
-// get the title name from the source's "title" property
-'text-field': ['get', 'title'],
-'text-font': [
-'Open Sans Semibold',
-'Arial Unicode MS Bold'
+'id': 'response_circles',
+'type': 'circle',
+'source': 'responses',
+'paint': {
+'circle-color': [
+'case',
+eventtype1,
+colors[0],
+eventtype2,
+colors[1],
+eventtype3,
+colors[2],
+eventtype4,
+colors[3],
+colors[4]
 ],
-'text-offset': [0, 1.25],
-'text-anchor': 'top'
+'circle-opacity': 0.6,
+'circle-radius': 12
 }
 });
 }
