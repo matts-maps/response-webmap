@@ -25,11 +25,11 @@ zoom: 3
 map.addControl(new mapboxgl.NavigationControl());
  
 // filters for classifying earthquakes into five categories based on magnitude
-var eventtype1 = ['=', ['get', 'evenytype'], Flood];
-var eventtype2 = ['=', ['get', 'evenytype'], Cyclone];
-var eventtype3 = ['=', ['get', 'evenytype'], Earthquake];
-var eventtype4 = ['=', ['get', 'evenytype'], Covid-19];
-var eventtype5 = ['=', ['get', 'evenytype'], Munitions Explosion];
+var eventtype1 = ['=', ['get', 'eventtype'], Flood];
+var eventtype2 = ['=', ['get', 'eventtype'], Cyclone];
+var eventtype3 = ['=', ['get', 'eventtype'], Earthquake];
+var eventtype4 = ['=', ['get', 'eventtype'], Covid-19];
+var eventtype5 = ['=', ['get', 'eventtype'], Munitions Explosion];
  
 // colors to use for the categories
 var colors = ['#fed976', '#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c'];
