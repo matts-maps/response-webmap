@@ -103,16 +103,6 @@
     // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
 
-    $(document).ready(function () {
-      $.ajax({
-        type: "GET",
-        //YOUR TURN: Replace with csv export link
-        url: 'https://docs.google.com/spreadsheets/d/1AyejJOwq66Zd-xT9z5CMbh6CNcHzSFjGQPdVZqQ72qQ/gviz/tq?tqx=out:csv&sheet=1494601508',
-        dataType: "text",
-        success: function (csvData) { makeGeoJSON(csvData); }
-      });
-
-
 
             //Add the the layer to the map 
 
