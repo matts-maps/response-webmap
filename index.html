@@ -123,18 +123,36 @@ map.addControl(new mapboxgl.NavigationControl());
           map.on('load', function () {
 
             //Add the the layer to the map 
-            map.addLayer({
-              'id': 'csvData',
-              'type': 'circle',
-              'source': {
-                'type': 'geojson',
-                'data': data
-              },
-              'paint': {
-                'circle-radius': 5,
-                'circle-color': rgb(50, 188, 173)
-              }
-            });
+        map.addLayer({
+        'id': 'csvData',
+        'type': 'circle',
+        'source': 
+        'paint': {
+        // make circles larger as the user zooms from z12 to z22
+        'circle-radius': {
+        'base': 1.75,
+        'stops': [
+        [12, 2],
+        [22, 180]
+        ]
+        },
+        // color circles by ethnicity, using a match expression
+        // https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
+        'circle-color': [
+        'match',
+        ['get', 'eventdata'],
+        'Floods',
+        '#fbb03b',
+        'Cyclone',
+        '#223b53',
+        'Earthquake',
+        '#e55e5e',
+        'Munitions Explosion',
+        '#3bb2d0',
+        /* other */ '#ccc'
+        ]
+        }
+        });
 
 
             // When a click event occurs on a feature in the csvData layer, open a popup at the
