@@ -3,7 +3,7 @@
 
 <head>
   <meta charset='utf-8' />
-  <title>MapAction responses</title>
+  <title></title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
   <script src="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js"></script>
@@ -44,7 +44,7 @@
     }
 
     .mapboxgl-popup-content h3 {
-      background: rgb(50, 188, 173);
+      background: rgb(61, 59, 59);
       text-align: center;
       color: #fff;
       margin: 0;
@@ -94,14 +94,11 @@
     mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYWN0aW9uIiwiYSI6ImNqOG9sbmQ5dTA0bG0zMnF1anB2M2wwZmYifQ.CKWhThHWbjRXUBnBcRoOqQ'; //Mapbox token 
     var map = new mapboxgl.Map({
       container: 'map', // container id
-      style: 'mapbox://styles/mapbox/dark-v10', //stylesheet location
-      center: [1, 1], // starting position
+      style: 'mapbox://styles/mapbox/streets-v11', //stylesheet location
+      center: [0.5, 0.5], // starting position
       zoom: 2,// starting zoom
       transformRequest: transformRequest
     });
-
-    // Add zoom and rotation controls to the map.
-map.addControl(new mapboxgl.NavigationControl());
 
     $(document).ready(function () {
       $.ajax({
@@ -132,7 +129,7 @@ map.addControl(new mapboxgl.NavigationControl());
               },
               'paint': {
                 'circle-radius': 5,
-                'circle-color': rgb(50, 188, 173)
+                'circle-color': "purple"
               }
             });
 
@@ -145,11 +142,7 @@ map.addControl(new mapboxgl.NavigationControl());
               //set popup text 
               //You can adjust the values of the popup to match the headers of your CSV. 
               // For example: e.features[0].properties.Name is retrieving information from the field Name in the original CSV. 
-<<<<<<< HEAD
-              var description = `<h3>` + e.features[0].properties.Title + `</h3>` + `<br>` + `<b>` + `Date: ` + `</b>` + e.features[0].properties.daterange  + `<br>` + `<b>` + `Location: ` + `</b>` + e.features[0].properties.city + `, ` + e.features[0].properties.country + `<br>` + `<b>` + `Event: ` + `</b>` + e.features[0].properties.eventtype + `<br>` + `<b>` + `Partner: ` + `</b>` + e.features[0].properties.partner + `<br>` + `<b>` + `Maps: ` + `</b>` + `<a href="` + e.features[0].properties.mdrurl + `">Maps and Data Repository</a>` + `</h4>`;
-=======
-              var description = `<h3>` + e.features[0].properties.Title + `</h3>` + `<h4>` + `<b>` + `Date: ` + `</b>` + e.features[0].properties.daterange + `</h4>` + `<h4>` + `<b>` + `Location: ` + `</b>` + e.features[0].properties.city + `, ` + e.features[0].properties.country +`</h4>`+ `<h4>` + `<b>` + `Event: ` + `</b>` + e.features[0].properties.eventtype + `</h4>`+ `<h4>` + `<b>` + `Partner: ` + `</b>` + e.features[0].properties.partner + `</h4>`+ `<h4>` + `<b>` + `Maps: ` + `</b>` + `<a href="` + e.features[0].properties.mdrurl + `>Maps and Data Repository</a>` + `</h4>`;
->>>>>>> parent of 3ea69f9... Update index.html
+              var description = `<h3>` + e.features[0].properties.Name + `</h3>` + `<h4>` + `<b>` + `Address: ` + `</b>` + e.features[0].properties.Address + `</h4>` + `<h4>` + `<b>` + `Phone: ` + `</b>` + e.features[0].properties.Phone + `</h4>`;
 
               // Ensure that if the map is zoomed out such that multiple
               // copies of the feature are visible, the popup appears
