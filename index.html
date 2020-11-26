@@ -80,6 +80,9 @@
   <div id='map'></div>
   <script>
 
+  // Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl());
+
     var transformRequest = (url, resourceType) => {
       var isMapboxRequest =
         url.slice(8, 22) === "api.mapbox.com" ||
